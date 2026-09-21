@@ -4,8 +4,9 @@
 
 ## 1. Adding an Audio Parameter to the PluginProcessor \<PluginProcessor\>
 > Structure design: 
-> What are we making? - A volume plugin.
-> What do we need to change? - *a number* we can multiply to the signal **(gain)**.
+> 
+> What are we making? - A volume plugin.\
+> What do we need to change? - *a number* we can multiply to the signal **(gain)**.\
 > What is the range of gain? - 0 (mute) ~ 1 (as-is) ~ 2(any amplifying number on your choice).
 
 1. Declare a float pointer for gain.
@@ -38,8 +39,8 @@
    ```
 
 
-    > ### 🛠️ Build and Check time!
-    > See if a new paramater "Gain" appears in the plugin. We have not made the controller yet, so this parameter does not do anything yet!
+> ### 🛠️ Build and Check time!
+> See if a new paramater "Gain" appears in the plugin. We have not made the controller yet, so this parameter does not do anything yet!
 
 
 1. Now, let's add a variable that stores a gain value as an *algorithm parameter*.
@@ -114,8 +115,8 @@
         }
     }
    ```
-    > ### 🛠️ Build and Check time!
-    > See if a the volume changes as you change the Gain parameter in your DAW's default UI.  We have not made a GUI for the plugin yet, but the parameter change in the DAW will change the volume!
+> ### 🛠️ Build and Check time!
+> See if a the volume changes as you change the Gain parameter in your DAW's default UI.  We have not made a GUI for the plugin yet, but the parameter change in the DAW will change the volume!
 
  
 ## 2. Making a Slider GUI \<PluginEditor\>
@@ -128,9 +129,9 @@
    ```
 
 2. Set some parameters of the Slider object.
-    > Think of the volume slider in your computer. What does it have?
-    Its position, length, height, value, range, ...
-    We are setting this part of the slider here.
+    > Think of the volume slider in your computer. What does it have?\
+    > Its position, length, height, value, range, ...\
+    > We are setting this part of the slider here.
     
    **📄PluginEditor.cpp**
    ``` c++
@@ -159,9 +160,9 @@
           addAndMakeVisible(mVolumeSlider);
     }
    ```    
-    > ### 🛠️ Build and Check time!
-    > Open the GUI and check if there is a slider. Does the GUI slider change the volume?
-    > It should not change yet; we have not told the code to listen to the slider value change!
+> ### 🛠️ Build and Check time!
+> Open the GUI and check if there is a slider. Does the GUI slider change the volume?\
+> It should not change yet; we have not told the code to listen to the slider value change!
 
 3. Make AudioPluginProcessorEditor inherit from the Slider::Listener class.
 
@@ -179,10 +180,10 @@
         void sliderValueChanged(juce::Slider* slider) override;
     ```
 5. Implement the `sliderValueChanged()` method.
-    >A) Create a pointer to the list of AudioParameters in the PluginProcessor.
-    >B) Check to see *which* slider has been changed.
-    >C) Get a pointer to the AudioParameter we want to control with this slider
-    >D) Use the new value from the slider to set the AudioParameter
+    >A) Create a pointer to the list of AudioParameters in the PluginProcessor.\
+    >B) Check to see *which* slider has been changed.\
+    >C) Get a pointer to the AudioParameter we want to control with this slider\
+    >D) Use the new value from the slider to set the AudioParameter\
     >E) We can use `DGB()` to print to the console while our plugin is running in debug mode.
 
     **📄PluginEditor.cpp**
@@ -245,9 +246,9 @@
     }
    ```  
 
-    > ### 🛠️ Build and Check time!
-    > Now, the slider UI should change the volume!
-    > How can we improve this plugin? Design choice? Aesthetics? User experience? ...
+> ### 🛠️ Build and Check time!
+> Now, the slider UI should change the volume!\
+> How can we improve this plugin? Design choice? Aesthetics? User experience? ...
 
 ---
 # Further Exploration
