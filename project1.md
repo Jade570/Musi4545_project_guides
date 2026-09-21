@@ -9,12 +9,14 @@
 > What is the range of gain? - 0 (mute) ~ 1 (as-is) ~ 2(any amplifying number on your choice).
 
 1. Declare a float pointer for gain.
+
     **📄PluginProcessor.h**
     ``` c++
     private:
         juce::AudioParameterFloat* mGainParam;
     ```
 2. Instantiate the new PluginParameter in the PluginProcessor **constructor**.
+
    **📄PluginProcessor.cpp**
    ``` c++
    Mu45effectAudioProcessor::Mu45effectAudioProcessor()
@@ -27,6 +29,7 @@
     }
    ```
 3. We do not edit the **destructor** this time! Skip.
+
   **📄PluginProcessor.cpp**
    ``` c++
     Mu45effectAudioProcessor::~Mu45effectAudioProcessor()
@@ -39,7 +42,8 @@
     > See if a new paramater "Gain" appears in the plugin. We have not made the controller yet, so this parameter does not do anything yet!
 
 
-4. Now, let's add a variable that stores a gain value as an *algorithm parameter*.
+1. Now, let's add a variable that stores a gain value as an *algorithm parameter*.
+
     **📄PluginProcessor.h**
     ``` c++
     private:
@@ -48,7 +52,8 @@
         // Algorithm Parameter
         float mGainLinear;
     ```
-5. Let's initialize `mGainLinear` value as its default `1.0` in `prepareToPlay()` method of the AudioProcessor. `PrepareToPlay()` runs before any kind of audio processing starts. 
+2. Let's initialize `mGainLinear` value as its default `1.0` in `prepareToPlay()` method of the AudioProcessor. `PrepareToPlay()` runs before any kind of audio processing starts. 
+
     **📄PluginProcessor.cpp**
     ``` c++
     void Mu45effectAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
@@ -57,7 +62,8 @@
     }
    ```
 
-6. We are now going to calculate the algorithm parameter and give `mGainLinear` its value. Let's define our *method* in the header file first.
+3. We are now going to calculate the algorithm parameter and give `mGainLinear` its value. Let's define our *method* in the header file first.
+
     **📄PluginProcessor.h**
     ``` c++
     private:
@@ -69,7 +75,8 @@
         void calcAlgorithmParams();
     ```
 
-7. If we call this method, it will calculate the value of the algorithm parameter based on user parameter value. In this case, **user parameter value == algorithm parameter value**. Before the `processBlock()` method, let's add and fill our new method, `calcAlgorithmParams()`.
+4. If we call this method, it will calculate the value of the algorithm parameter based on user parameter value. In this case, **user parameter value == algorithm parameter value**. Before the `processBlock()` method, let's add and fill our new method, `calcAlgorithmParams()`.
+
     **📄PluginProcessor.cpp**
     ``` c++
     void Mu45effectAudioProcessor::calcAlgorithmParams()
@@ -78,7 +85,8 @@
     }
    ```
 
-8. Now, we process the audio signal with our gain value in `processBlock()`.   
+5. Now, we process the audio signal with our gain value in `processBlock()`.   
+
     **📄PluginProcessor.cpp**
     ``` c++
     void Mu45effectAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &midiMessages)
@@ -112,6 +120,7 @@
  
 ## 2. Making a Slider GUI \<PluginEditor\>
 1. Add a Slider object in the header file.
+
    **📄PluginEditor.h**
    ``` c++
     private:
@@ -155,12 +164,14 @@
     > It should not change yet; we have not told the code to listen to the slider value change!
 
 3. Make AudioPluginProcessorEditor inherit from the Slider::Listener class.
+
     **📄PluginEditor.h**
     ``` c++
     class Mu45effectAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener
     {...}
     ```
 4. Define a new public method `sliderValueChanged()`. we are *overriding* the method `Slider::Listener::sliderValueChanged`.
+
     **📄PluginEditor.h**
     ``` c++
     public:
@@ -174,34 +185,35 @@
     >D) Use the new value from the slider to set the AudioParameter
     >E) We can use `DGB()` to print to the console while our plugin is running in debug mode.
 
- **📄PluginEditor.cpp**
-``` c++
-    // This method is called whenever any slider is changed
-    void Mu45effectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
-    {
-        // A) create a pointer to AudioParameters in the AudioProcessor
-        auto& processorParams = processor.getParameters();
-
-        // B) check to see which slider has been changed
-        if (slider == &mVolumeSlider)
+    **📄PluginEditor.cpp**
+    ``` c++
+        // This method is called whenever any slider is changed
+        void Mu45effectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
         {
-            // C) get a pointer to the first parameter in the AudioProcessor    
-            juce::AudioParameterFloat* procParam = 
-            (juce::AudioParameterFloat*)processorParams.getUnchecked(0);
+            // A) create a pointer to AudioParameters in the AudioProcessor
+            auto& processorParams = processor.getParameters();
 
-            // D) Use the value from the slider to set the AudioParamaeter in the AudioProcessor
-            float sliderValue = mVolumeSlider.getValue();
-            *procParam = sliderValue; // set the param
+            // B) check to see which slider has been changed
+            if (slider == &mVolumeSlider)
+            {
+                // C) get a pointer to the first parameter in the AudioProcessor    
+                juce::AudioParameterFloat* procParam = 
+                (juce::AudioParameterFloat*)processorParams.getUnchecked(0);
 
-            // E) We can use DBG() for simple pring debugging
-            DBG("Slider value changed: " << sliderValue);
+                // D) Use the value from the slider to set the AudioParamaeter in the AudioProcessor
+                float sliderValue = mVolumeSlider.getValue();
+                *procParam = sliderValue; // set the param
 
-            procParam->setValueNotifyingHost((float)mVolumeSlider.getValue());
+                // E) We can use DBG() for simple pring debugging
+                DBG("Slider value changed: " << sliderValue);
+
+                procParam->setValueNotifyingHost((float)mVolumeSlider.getValue());
+            }
         }
-    }
-```
+    ```
 
 6. Add a listener to the constructor.
+
    **📄PluginEditor.cpp**
    ``` c++
     Mu45effectAudioProcessorEditor::Mu45effectAudioProcessorEditor (Mu45effectAudioProcessor& p)
@@ -246,7 +258,7 @@
     Refer to: https://docs.juce.com/master/classjuce_1_1Slider.html#af1caee82552143dd9ff0fc9f0cdc0888
 3. I want to check out every other cool things JUCE have!
     JUCE Module document: https://docs.juce.com/master/index.html 
-    #### Ask & tell us if the linked document is too overwhelming and you need help!
+    ### Ask & tell us if the linked document is too overwhelming and you need help!
 
 ---
 This is a rearranged document of the original handout made by Professor Luke Dahl.
