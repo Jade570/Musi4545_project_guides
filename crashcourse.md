@@ -128,10 +128,10 @@ To investigate which code is making a bug, and when it is making a bug.
   ```c++
   class Animal {
     private:
-        std::string genus;
-        std::string species;
+        std::string name;
+        int age;
     public:
-        Animal(std::string genus_name, std::string species_name); 
+        Animal(std::string animal_name, int animal_age); 
         ~Animal();
 
         void walk();
