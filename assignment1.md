@@ -43,7 +43,7 @@
 > See if a new paramater "Gain" appears in the plugin. We have not made the controller yet, so this parameter does not do anything yet!
 
 
-1. Now, let's add a variable that stores a gain value as an *algorithm parameter*.
+4. Now, let's add a variable that stores a gain value as an *algorithm parameter*.
 
     **📄PluginProcessor.h**
     ``` c++
@@ -53,7 +53,7 @@
         // Algorithm Parameter
         float mGainLinear;
     ```
-2. Let's initialize `mGainLinear` value as its default `1.0` in `prepareToPlay()` method of the AudioProcessor. `PrepareToPlay()` runs before any kind of audio processing starts. 
+5. Let's initialize `mGainLinear` value as its default `1.0` in `prepareToPlay()` method of the AudioProcessor. `PrepareToPlay()` runs before any kind of audio processing starts. 
 
     **📄PluginProcessor.cpp**
     ``` c++
@@ -63,7 +63,7 @@
     }
    ```
 
-3. We are now going to calculate the algorithm parameter and give `mGainLinear` its value. Let's define our *method* in the header file first.
+6. We are now going to calculate the algorithm parameter and give `mGainLinear` its value. Let's define our *method* in the header file first.
 
     **📄PluginProcessor.h**
     ``` c++
@@ -76,7 +76,7 @@
         void calcAlgorithmParams();
     ```
 
-4. If we call this method, it will calculate the value of the algorithm parameter based on user parameter value. In this case, **user parameter value == algorithm parameter value**. Before the `processBlock()` method, let's add and fill our new method, `calcAlgorithmParams()`.
+7. If we call this method, it will calculate the value of the algorithm parameter based on user parameter value. In this case, **user parameter value == algorithm parameter value**. Before the `processBlock()` method, let's add and fill our new method, `calcAlgorithmParams()`.
 
     **📄PluginProcessor.cpp**
     ``` c++
@@ -86,7 +86,7 @@
     }
    ```
 
-5. Now, we process the audio signal with our gain value in `processBlock()`.   
+8. Now, we process the audio signal with our gain value in `processBlock()`.   
 
     **📄PluginProcessor.cpp**
     ``` c++
