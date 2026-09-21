@@ -5,7 +5,7 @@
 - [Basic Programming Terms](#basic-programming-terms)
   - [variables and data types](#variables-and-data-types)
     - [Frequently used data types](#frequently-used-data-types)
-  - [declare, assign, instantiate](#declare-assign-instantiate)
+  - [declare, assign, initialize](#declare-assign-initialize)
   - [basic maths](#basic-maths)
   - [compile, build](#compile-build)
   - [error vs bug](#error-vs-bug)
@@ -51,7 +51,7 @@ float randomVariable=0.1;
 - `char`: stores one character. `a`, `1`. 
 - `bool`: stores `true` or `false`. Useful to make an on-off switch. 
 
-## declare, assign, instantiate
+## declare, assign, initialize
 - We `declare` a variable.
   ``` c++
   int randomVariable;
@@ -61,11 +61,11 @@ float randomVariable=0.1;
     randomVariable = 1;
   ```
 
-- We `instantiate` a variable as ~.
+- We `initialize` a variable as ~.
   ``` c++
   int randomVariable = 1;
   ```
-  `instantiate` is `declaring` and `assigning` a variable in one line.
+  `initialize` is `declaring` and `assigning` a variable in one line.
 
 ## basic maths
 - `==`: equal sign
@@ -154,11 +154,21 @@ Class is like a specification of a group.
 
 It includes `constructor`, `destructor`, and `method`.
 
-If you create an `Animal` with a `constructor`, that is an `object`.
+If you create an `Animal` with a `constructor`, that is an `object`. Creating an object from a class is called `instantiate`.
 
+```c++
+Animal cat("Nabi", 3); // we instantiated an Animal object named "cat".
+```
 ### public, private
-`Public` is open to everywhere. You can get anything from `public` field.
-`Private` is shared only to the object that belongs to.
+`public` is open to everywhere. Any code can use it.
+
+`private` can only be used by the code inside the class itself (its own methods). Code outside the class cannot touch it, and even child classes like `Dog` cannot.
+
+```c++
+Animal cat("Nabi", 3);
+cat.walk();  // OK: walk() is public.
+cat.name;    // compile error: name is private.
+```
 
 ### method
 Let's think of a function that works in the class for now.
@@ -242,7 +252,7 @@ Think of a shortcut or a quick link. It refers to the original variable.
 - `&variable` is the address to the variable. 
 ``` c++
 int* pointer; // I will pointing a integer variable via "pointer" variable.
-int var = 1; // I instantiated a integer variable "var" as 1.
+int var = 1; // I initialized a integer variable "var" as 1.
 pointer = &var; // "pointer" variable is storing the address of "var".
 ```
 now, because `pointer` is a quick link to `var`, `*pointer` will change as `var` change.
