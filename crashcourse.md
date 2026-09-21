@@ -131,10 +131,10 @@ To investigate which code is making a bug, and when it is making a bug.
         std::string name;
         int age;
     public:
-        Animal(std::string animal_name, int animal_age); 
-        ~Animal();
+        Animal(std::string animal_name, int animal_age);
+        virtual ~Animal(); // `virtual` here: just copy this for now. Explained in "override".
 
-        void walk();
+        virtual void walk(); // `virtual`: explained in "override".
         void sleep(int hours);
         float eat(std::string food_name, int amount);
   };
@@ -177,27 +177,35 @@ Instead of rewriting the code for walking, sleeping, and eating for every single
 - Parent Class (Base): `Animal`
 - Child Class (Derived): `Dog`, `Bird`...
 
-```c++
+```
+// simplified example: constructors are omitted.
 class Dog : public Animal {
     public:
     // Dog automatically has walk(), sleep(), and eat() from Animal.
     void bark();
-}
+};
 ```
 
 ### override
 What if we just want to change one method just a little bit? Like rabbits, that walk by hopping.
 
 Then we `override` `walk()`: rewrite the internal details.
-``` c++
+
+```
+// simplified example: constructors are omitted.
 class Rabbit : public Animal {
     public:
-       // overriding walk method to hop instead of 'normal' walk 
+       // overriding walk method to hop instead of 'normal' walk
         void walk() override {
             // rabbit's hopping logic
         }
-}
+};
 ```
+
+`override` only works if the parent's method has `virtual` in front of it (look at `virtual void walk();` in `Animal`). Think of it as the parent saying "children are allowed to change this one" in advance.
+
+- You will see `virtual` and `override` a lot in JUCE. JUCE's classes mark some methods as `virtual`, and we `override` them to write our own audio processing code.
+- `virtual ~Animal();`: when a class is meant to be inherited, put `virtual` in front of the destructor too. For now, just remember to do it.
 
 
 
