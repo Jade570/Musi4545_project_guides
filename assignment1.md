@@ -184,7 +184,7 @@
     >B) Check to see *which* slider has been changed.\
     >C) Get a pointer to the AudioParameter we want to control with this slider\
     >D) Use the new value from the slider to set the AudioParameter\
-    >E) We can use `DGB()` to print to the console while our plugin is running in debug mode.
+    >E) We can use `DBG()` to print to the console while our plugin is running in debug mode.
 
     **📄PluginEditor.cpp**
     ``` c++
