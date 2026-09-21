@@ -188,7 +188,7 @@ Instead of rewriting the code for walking, sleeping, and eating for every single
 - Parent Class (Base): `Animal`
 - Child Class (Derived): `Dog`, `Bird`...
 
-```
+```c++
 // simplified example: constructors are omitted.
 class Dog : public Animal {
     public:
@@ -202,7 +202,7 @@ What if we just want to change one method just a little bit? Like rabbits, that 
 
 Then we `override` `walk()`: rewrite the internal details.
 
-```
+```c++
 // simplified example: constructors are omitted.
 class Rabbit : public Animal {
     public:
