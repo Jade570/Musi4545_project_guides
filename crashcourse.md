@@ -23,7 +23,8 @@
   - [function](#function)
   - [pointer](#pointer)
 - [JUCE](#juce)
-  - [What is JUCE? Why are we using JUCE? What does JUCE do?](#what-is-juce-why-are-we-using-juce-what-does-juce-do)
+  - [What is JUCE? Why are we using JUCE?](#what-is-juce-why-are-we-using-juce)
+  - [Projucer](#projucer)
 ---
 
 # Basic Programming Terms
@@ -260,5 +261,16 @@ now, because `pointer` is a quick link to `var`, `*pointer` will change as `var`
 ---
 
 # JUCE
-## What is JUCE? Why are we using JUCE? What does JUCE do?
-Juce is a C++ based framework that helps your audio processing work easier. 
+## What is JUCE? Why are we using JUCE?
+JUCE is a C++ based framework that makes audio programming easier.
+
+In class, we learned about bit depth, sampling rate, ADC, and DAC. If we had to build all of that from scratch, we would spend most of our time on the plumbing before we could make any sound. With JUCE, we don't have to. We can focus on the part we actually care about: what to do with the sound.
+
+JUCE also comes with many pre-defined functions, macros, and enums. Their names are quite intuitive, so the code is easier to read and write.
+
+## Projucer
+Projucer is a program that comes with JUCE. It manages your project files.
+
+- It creates the backbone of your project: the folder structure and the build files (e.g. Makefile, Xcode project, Visual Studio project). You only need to write the source code.
+- Once you create a project and set up the file structure, you can close the Projucer window while you code.
+- You need to open it again when you add new files or change the project settings.
