@@ -35,7 +35,7 @@
 
 `randomVariable` and `randomvariable` are considered different variables.
 
-- You cannot assign variables with same names.
+- You cannot declare variables with same names.
 ```c++
 int randomVariable=1;
 float randomVariable=0.1;
@@ -49,7 +49,7 @@ float randomVariable=0.1;
 - `int`: stores integer. no decimals. 
 - `float`: stores decimals. `0.1f`. 
     - `double`: stores decimals, but it can store larger number than float.
-- `char`: stores one character. `a`, `1`. 
+- `char`: stores one character. `'a'`, `'1'`. 
 - `bool`: stores `true` or `false`. Useful to make an on-off switch. 
 
 ## declare, assign, initialize
@@ -62,7 +62,7 @@ float randomVariable=0.1;
     randomVariable = 1;
   ```
 
-- We `initialize` a variable as ~.
+- "We `initialize` a variable: `declare` and `assign` in one line.
   ``` c++
   int randomVariable = 1;
   ```
@@ -70,7 +70,7 @@ float randomVariable=0.1;
 
 ## basic maths
 - `==`: equal sign
-  - `=` is only used for assigning (or instantiating) a variable.
+  - `=` is only used for assigning (or initializing) a variable.
   - `if (randomVariable == 2)`: is "`randomVariable` is 2" true?
 - `++`: plus 1
 - `--`: minus 1
@@ -79,6 +79,7 @@ float randomVariable=0.1;
     int randomVariable = 1;
     randomVariable += 2;
     // randomVariable == 3
+    ```
     
 ## compile, build
 - `compile`: Computer can only read 0,1. We need to translate our code into 0 and 1s. If there is something that cannot be translated, it emits "compile error". 
@@ -158,7 +159,7 @@ It includes `constructor`, `destructor`, and `method`.
 If you create an `Animal` with a `constructor`, that is an `object`. Creating an object from a class is called `instantiate`.
 
 ```c++
-Animal cat("Nabi", 3); // we instantiated an Animal object named "cat".
+Animal myPet("Nabi", 3); // we instantiated an Animal object named "myPet".
 ```
 ### public, private
 `public` is open to everywhere. Any code can use it.
@@ -166,7 +167,7 @@ Animal cat("Nabi", 3); // we instantiated an Animal object named "cat".
 `private` can only be used by the code inside the class itself (its own methods). Code outside the class cannot touch it, and even child classes like `Dog` cannot.
 
 ```c++
-Animal cat("Nabi", 3);
+Animal myPet("Nabi", 3);
 cat.walk();  // OK: walk() is public.
 cat.name;    // compile error: name is private.
 ```
@@ -252,7 +253,7 @@ Think of a shortcut or a quick link. It refers to the original variable.
 - add `*` to any data type, and that's the pointer to that data type variable.
 - `&variable` is the address to the variable. 
 ``` c++
-int* pointer; // I will pointing a integer variable via "pointer" variable.
+int* pointer; // I will be pointing an integer variable via "pointer" variable.
 int var = 1; // I initialized a integer variable "var" as 1.
 pointer = &var; // "pointer" variable is storing the address of "var".
 ```
