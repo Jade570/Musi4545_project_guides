@@ -194,7 +194,7 @@ Now, we are going to add and make filters with added external libraries.
     ...
     private:
         //==============================================================================
-        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Mu45filter_prevAudioProcessor)
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Mu45FilterDemoAudioProcessor)
         void calcAlgorithmParams();
         juce::AudioParameterFloat *mFilterFcParam;
         juce::AudioParameterFloat *mFilterQParam;
@@ -210,7 +210,7 @@ Now, we are going to add and make filters with added external libraries.
     - make it process audio chennels through the filters by using the filters' `tick()` method.
     **📄PluginProcessor.cpp**
    ``` c++
-    void Mu45filter_prevAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &midiMessages)
+    void Mu45FilterDemoAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &midiMessages)
     {
         // JUCE book - keeping to make sure there's no bad data in the output buffers
         juce::ScopedNoDenormals noDenormals;
@@ -239,7 +239,7 @@ Now, we are going to add and make filters with added external libraries.
    - We are storing current audio sampling rate here.
     **📄PluginProcessor.cpp**
    ``` c++
-    void Mu45filter_prevAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
+    void Mu45FilterDemoAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
     {
         // Use this method as the place to do any pre-playback
         // initialisation that you need..
@@ -253,7 +253,7 @@ Now, we are going to add and make filters with added external libraries.
    - We will use `setCoefficients()` of `BiQuad` class to set the coefficients of the filters.
     **📄PluginProcessor.cpp**
    ``` c++
-    void Mu45filter_prevAudioProcessor::calcAlgorithmParams()
+    void Mu45FilterDemoAudioProcessor::calcAlgorithmParams()
     {
         // Get the user parameter values
         float fc = mFilterFcParam->get();
