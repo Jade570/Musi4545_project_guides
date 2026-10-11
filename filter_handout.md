@@ -4,17 +4,17 @@
 1. Make a new AudioPlugin effect using Projucer. Name it `Mu45FilterDemo`.
 2. From Canvas/Filtes/Code, download `StkLite-4.6.2.zip` and `Mu45FilterCalc.zip`.
 
-> the current version of Stk, stk5.0.1, will make a tiny errors without some configurations. We are using the previous version provided in Canvas for now.
+> the current version of Stk, stk5.0.1, will make a tiny errors without some configurations.\ We are using the previous version provided in Canvas for now.
 
 ### Q. What are these .zip files? What do they do?
-They are sets of different codes that JUCE does not provide.
-We call these *external library*. 
-For this exercise, we learn how to use external libraries in JUCE.
+They are sets of different codes that JUCE does not provide.\
+We call these *external library*. \
+For this exercise, we learn how to use external libraries in JUCE.\
 
 ### So, this handout can be divided into 3 parts:
-  [1. Writing a basic JUCE code](#1-writing-a-basic-juce-code)
-  [2. **Adding External Library** to the JUCE project](#2-adding-external-library-to-the-juce-project)
-  [3. **Adding filters** to the code](#3-adding-filters-to-the-code)
+  [1. Writing a basic JUCE code](#1-writing-a-basic-juce-code)\
+  [2. **Adding External Library** to the JUCE project](#2-adding-external-library-to-the-juce-project)\
+  [3. **Adding filters** to the code](#3-adding-filters-to-the-code)\
 
 ## 1. Writing a basic JUCE code 
 1. Configure `PluginProcessor.h`.
@@ -54,7 +54,7 @@ For this exercise, we learn how to use external libraries in JUCE.
 3. Configure `PluginEditor.h`.
    - Add `juce::Slider::Listener` class and its `sliderValueChanged()` function
    - add 2 slider variables for cuttoff frequency(`mFilterFcSlider`) and Q (`mFilterQSlider`).
-   - 
+  
     **📄PluginEditor.h**
     ``` c++
     class Mu45FilterDemoAudioProcessorEditor : public juce::AudioProcessorEditor, public juce::Slider::Listener
@@ -147,28 +147,28 @@ For this exercise, we learn how to use external libraries in JUCE.
 > Open the GUI and check if there is one vertical slider and one rotary knob.
 
 ## 2. Adding External Library to the JUCE project
-We will now add `StkLite-4.6.2` and `Mu45FilterCalc` in our project.
-First, unzip them and make sure the file structure aligns to what we want.
+We will now add `StkLite-4.6.2` and `Mu45FilterCalc` in our project.\
+First, unzip them and make sure the file structure aligns to what we want.\
 
 1. How does unzipped `StkLite-4.6.2` look like?
-![Initial File Structure for StkLite-4.6.2](filter_imgs\file_structure_stk.png)
-We want `.cpp` and `.h` files directly under `StkLite-4.6.2` folder.
-However, this has another folder named `StkLite-4.6.2` inside the folder with the same name.
+![Initial File Structure for StkLite-4.6.2](filter_imgs/file_structure_stk.png)
+We want `.cpp` and `.h` files directly under `StkLite-4.6.2` folder.\
+However, this has another folder named `StkLite-4.6.2` inside the folder with the same name.\
 Make the file structure be like this:
-![Desired File Structure for StkLite-4.6.2](filter_imgs\stk_after.png)
-Without any subfolders, let `.cpp` and `.h` files directly under `StkLite-4.6.2` folder.
+![Desired File Structure for StkLite-4.6.2](filter_imgs/stk_after.png)
+Without any subfolders, let `.cpp` and `.h` files directly under `StkLite-4.6.2` folder.\
 
 Please do the same with `Mu45FilterCalc`.
 
 2. Copy `StkLite-4.6.2` and `Mu45FilterCalc` folders into your `Source` folder in your project. 
 Your `Source` folder should be look like this:
-![File structure inside Source folder](filter_imgs\source_file_structure.png)
+![File structure inside Source folder](filter_imgs/source_file_structure.png)
 
 3. Go to the Projucer app and open the project. On the left tab, click File Explorer and click '+'. Then, select `Add Existing Files...`
-![Projucer click + in File Explorer tab on the left](filter_imgs\Projucer_add.png)
+![Projucer click + in File Explorer tab on the left](filter_imgs/Projucer_add.png)
 
 4. Select two folders we just added, and select `Open`.
-![Projucer select two folders (`StkLite-4.6.2` and `Mu45FilterCalc`)](filter_imgs\Projucer_file_select.png)
+![Projucer select two folders (`StkLite-4.6.2` and `Mu45FilterCalc`)](filter_imgs/Projucer_file_select.png)
 
 5. **Save** and Build!
 
@@ -180,9 +180,9 @@ Your `Source` folder should be look like this:
 Now, we are going to add and make filters with added external libraries.
 
 1. Edit `PluginProcessor.h`.
-    - Include `Mu45FilterCalc` and `Biquad` (from Stk) headers at the top of the code.
-    - Add a biquad filter for each channel.
-    - Add other member variables (ex: `mFs` for storing sampling rate)
+    - Include `Mu45FilterCalc` and `Biquad` (from Stk) headers at the top of the code.\
+    - Add a biquad filter for each channel.\
+    - Add other member variables (ex: `mFs` for storing sampling rate)\
 
     **📄PluginProcessor.h** 
     ``` c++
